@@ -1,27 +1,29 @@
 {
-  "name": "omnea-interview-kata",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest --watchAll"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/omnea-digital/interview-kata.git"
-  },
-  "author": "omnea",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/omnea-digital/interview-kata/issues"
-  },
-  "homepage": "https://github.com/omnea-digital/interview-kata#readme",
-  "dependencies": {
-    "@swc/core": "^1.3.6",
-    "@swc/jest": "^0.2.23",
-    "@types/jest": "^29.1.2",
-    "jest": "^29.1.2",
-    "prettier": "^2.7.1",
-    "typescript": "^4.8.4"
-  }
+	"name": "omnea-interview-kata",
+	"version": "0.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"lint": "biome check",
+		"lint:fix": "biome check --write",
+		"test": "vitest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Tohaker/omnea-interview-kata.git"
+	},
+	"author": "Tohaker",
+	"license": "UNLICENSED",
+	"bugs": {
+		"url": "https://github.com/Tohaker/omnea-interview-kata/issues"
+	},
+	"homepage": "https://github.com/Tohaker/omnea-interview-kata#readme",
+	"dependencies": {
+		"typescript": "6.0.3"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.16",
+		"@types/node": "25.9.1",
+		"vitest": "4.1.7"
+	}
 }
