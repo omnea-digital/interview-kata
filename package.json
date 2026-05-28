@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"check:types": "tsc --noEmit",
 		"lint": "biome check",
 		"lint:fix": "biome check --write",
 		"test": "vitest"
