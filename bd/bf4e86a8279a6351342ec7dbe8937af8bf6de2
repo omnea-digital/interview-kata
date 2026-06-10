@@ -1,0 +1,14 @@
+package.json
+  h_7476f09ddbf774 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "bdbf4e86a8279a6351342ec7dbe8937af8bf6de2",
+  "prompts": {},
+  "humans": {
+    "h_7476f09ddbf774": {
+      "author": "Sam Chatfield <sam.c@omnea.co>"
+    }
+  }
+}
