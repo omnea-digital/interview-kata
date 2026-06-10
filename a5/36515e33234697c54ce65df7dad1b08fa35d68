@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "a536515e33234697c54ce65df7dad1b08fa35d68",
+  "prompts": {},
+  "humans": {
+    "h_7476f09ddbf774": {
+      "author": "Sam Chatfield <sam.c@omnea.co>"
+    }
+  }
+}
