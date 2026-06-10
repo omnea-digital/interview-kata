@@ -1,0 +1,14 @@
+tsconfig.json
+  h_7476f09ddbf774 4,6,11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "eef2e3d8f24e8a6d5b24c5fb95e39be6c9b297ea",
+  "prompts": {},
+  "humans": {
+    "h_7476f09ddbf774": {
+      "author": "Sam Chatfield <sam.c@omnea.co>"
+    }
+  }
+}
