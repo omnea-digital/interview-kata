@@ -29,11 +29,13 @@ Each rover will be finished sequentially, which means that the second rover won`
 the first one has finished moving.
 
 ### OUTPUT
+
 The output for each rover should be its final coordinates and heading.
 
 ### EXAMPLE
 
 Test Input:
+
 ```
 5 5
 1 2 N
@@ -43,9 +45,27 @@ MMRMMRMRRM
 ```
 
 Expected Output:
+
 ```
 1 3 N
 5 1 E
 ```
 
 ![](./compass.png)
+
+## Getting started (Python)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the tests:
+
+```bash
+pytest
+```
+
+You start with a single failing placeholder test in `index_test.py`. Delete it and
+drive your solution out test-first.

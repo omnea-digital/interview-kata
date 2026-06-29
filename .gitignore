@@ -1,4 +1,6 @@
 .idea
-node_modules
-package-lock.json
-yarn.lock
+.venv
+__pycache__
+.pytest_cache
+*.egg-info
+*.pyc
