@@ -67,5 +67,12 @@ Run the tests:
 pytest
 ```
 
+This kata is written in **typed Python** — annotate your code and keep it clean under
+`mypy` (configured in strict mode):
+
+```bash
+mypy .
+```
+
 You start with a single failing placeholder test in `index_test.py`. Delete it and
 drive your solution out test-first.
