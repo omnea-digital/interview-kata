@@ -29,11 +29,13 @@ Each rover will be finished sequentially, which means that the second rover won`
 the first one has finished moving.
 
 ### OUTPUT
+
 The output for each rover should be its final coordinates and heading.
 
 ### EXAMPLE
 
 Test Input:
+
 ```
 5 5
 1 2 N
@@ -43,9 +45,34 @@ MMRMMRMRRM
 ```
 
 Expected Output:
+
 ```
 1 3 N
 5 1 E
 ```
 
 ![](./compass.png)
+
+## Getting started (Python)
+
+```bash
+uv sync
+```
+
+Run the tests:
+
+```bash
+uv run pytest
+```
+
+This kata is written in **typed Python** — annotate your code and keep it clean under
+[ruff](https://docs.astral.sh/ruff/) (linting) and [ty](https://docs.astral.sh/ty/)
+(type checking):
+
+```bash
+uv run ruff check .
+uv run ty check
+```
+
+You start with a single failing placeholder test in `index_test.py`. Delete it and
+drive your solution out test-first.
