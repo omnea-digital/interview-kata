@@ -76,3 +76,6 @@ mypy .
 
 You start with a single failing placeholder test in `index_test.py`. Delete it and
 drive your solution out test-first.
+
+> Looking for the `uv` + `ruff`/`ty` toolchain instead? See the
+> [`python-astral`](https://github.com/omnea-digital/interview-kata/tree/python-astral) branch.
