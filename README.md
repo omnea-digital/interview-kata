@@ -79,3 +79,7 @@ drive your solution out test-first.
 
 > Looking for the `uv` + `ruff`/`ty` toolchain instead? See the
 > [`python-astral`](https://github.com/omnea-digital/interview-kata/tree/python-astral) branch.
+
+## SOLUTION
+
+A solution to this problem has been implemented in `index.py`. In the interview, we'll improve and extend this implementation.
