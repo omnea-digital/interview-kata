@@ -79,3 +79,7 @@ drive your solution out test-first.
 
 > Looking for the `mypy` + `venv` toolchain instead? See the
 > [`python`](https://github.com/omnea-digital/interview-kata/tree/python) branch.
+
+## SOLUTION
+
+A solution to this problem has been implemented in `index.py`. In the interview, we'll improve and extend this implementation.
