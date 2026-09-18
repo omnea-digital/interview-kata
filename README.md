@@ -1,5 +1,11 @@
 # THE MARS ROVER KATA
 
+> **Versions of this kata**
+>
+> - [TypeScript](https://github.com/omnea-digital/interview-kata)
+> - **Python with `mypy`/`venv`** — you are here
+> - [Python with `uv`/`ruff`/`ty`](https://github.com/omnea-digital/interview-kata/tree/python-astral)
+
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This plateau, which is
 curiously rectangular, must be navigated by the rovers so that their on-board cameras can get a
 complete view of the surrounding terrain to send back to Earth.
@@ -76,9 +82,6 @@ mypy .
 
 You start with a single failing placeholder test in `index_test.py`. Delete it and
 drive your solution out test-first.
-
-> Looking for the `uv` + `ruff`/`ty` toolchain instead? See the
-> [`python-astral`](https://github.com/omnea-digital/interview-kata/tree/python-astral) branch.
 
 ## SOLUTION
 
