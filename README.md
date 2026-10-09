@@ -1,5 +1,12 @@
 # THE MARS ROVER KATA
 
+> **Versions of this kata**
+>
+> - [TypeScript](https://github.com/omnea-digital/interview-kata)
+> - [Python with `mypy`/`venv`](https://github.com/omnea-digital/interview-kata/tree/python)
+> - [Python with `uv`/`ruff`/`ty`](https://github.com/omnea-digital/interview-kata/tree/python-astral)
+> - **Go** — you are here
+
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This plateau, which is
 curiously rectangular, must be navigated by the rovers so that their on-board cameras can get a
 complete view of the surrounding terrain to send back to Earth.
@@ -53,6 +60,21 @@ Expected Output:
 
 ![](./compass.png)
 
-### SOLUTION
+## Getting started (Go)
 
-A solution to this problem has been implemented in `index.ts`. In the interview, we'll improve and extend this implementation.
+Run the tests:
+
+```bash
+go test ./...
+```
+
+Keep the code formatted and vetted:
+
+```bash
+gofmt -l .
+go vet ./...
+```
+
+## SOLUTION
+
+A solution to this problem has been implemented in `marsrover.go`. In the interview, we'll improve and extend this implementation.
