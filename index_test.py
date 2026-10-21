@@ -228,3 +228,23 @@ class TestParseInput:
 
         mission = MarsRoverMission.parse_input(input_text)
         assert mission.get_rover_output() == "0 1 N\n6 5 E"
+
+    @pytest.mark.parametrize(
+        ("input_text", "message"),
+        [
+            pytest.param("5 x\n1 2 N\nM", "Invalid plateau", id="invalid plateau"),
+            pytest.param("-5 5\n1 2 N\nM", "Invalid plateau", id="negative plateau"),
+            pytest.param("5 5\n1 2 Q\nM", "Invalid rover position", id="invalid direction"),
+            pytest.param("5 5\n1 N\nM", "Invalid rover position", id="missing coordinate"),
+            pytest.param("5 5\n6 2 N\nM", "outside plateau", id="rover outside plateau"),
+            pytest.param("5 5\n1 2 N\nMXM", "Invalid commands", id="invalid command"),
+            pytest.param(
+                "5 5\n1 2 N",
+                "position line and a commands line",
+                id="missing commands line",
+            ),
+        ],
+    )
+    def test_raises_on_invalid_input(self, input_text: str, message: str) -> None:
+        with pytest.raises(ValueError, match=message):
+            MarsRoverMission.parse_input(input_text)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Literal, cast
 
@@ -115,17 +116,30 @@ class MarsRoverMission:
     @staticmethod
     def parse_input(input_text: str) -> MarsRoverMission:
         lines = input_text.strip().split("\n")
-        max_x, max_y = (int(value) for value in lines[0].split(" "))
-        mission = MarsRoverMission(max_x, max_y)
+        if len(lines) % 2 == 0:
+            raise ValueError("Each rover needs a position line and a commands line")
+
+        plateau_match = re.fullmatch(r"(\d+)\s+(\d+)", lines[0])
+        if not plateau_match:
+            raise ValueError(f'Invalid plateau: "{lines[0]}"')
+        mission = MarsRoverMission(int(plateau_match[1]), int(plateau_match[2]))
 
         for i in range(1, len(lines), 2):
-            x_token, y_token, direction_token = lines[i].split(" ")
-            direction = cast(Direction, direction_token)
+            position_match = re.fullmatch(r"(\d+)\s+(\d+)\s+([NESW])", lines[i])
+            if not position_match:
+                raise ValueError(f'Invalid rover position: "{lines[i]}"')
+            x = int(position_match[1])
+            y = int(position_match[2])
+            direction = cast(Direction, position_match[3])
+            if not mission._plateau.is_within_bounds(x, y):
+                raise ValueError(f'Rover position outside plateau: "{lines[i]}"')
 
-            rover = Rover(int(x_token), int(y_token), direction)
+            rover = Rover(x, y, direction)
             mission.add_rover(rover)
 
             commands = lines[i + 1]
+            if not re.fullmatch(r"[LRM]*", commands):
+                raise ValueError(f'Invalid commands: "{commands}"')
             mission.execute_rover_commands(len(mission._rovers) - 1, commands)
 
         return mission
