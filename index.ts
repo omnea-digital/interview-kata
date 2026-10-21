@@ -137,19 +137,29 @@ export class MarsRoverMission {
 
   static parseInput(input: string): MarsRoverMission {
     const lines = input.trim().split("\n");
-    const [maxX, maxY] = lines[0].split(" ").map(Number);
-    const mission = new MarsRoverMission(maxX, maxY);
+    if (lines.length % 2 === 0) {
+      throw new Error("Each rover needs a position line and a commands line");
+    }
+
+    const plateauMatch = lines[0].match(/^(\d+)\s+(\d+)$/);
+    if (!plateauMatch) throw new Error(`Invalid plateau: "${lines[0]}"`);
+    const mission = new MarsRoverMission(Number(plateauMatch[1]), Number(plateauMatch[2]));
 
     for (let i = 1; i < lines.length; i += 2) {
-      const positionLine = lines[i].split(" ");
-      const x = Number(positionLine[0]);
-      const y = Number(positionLine[1]);
-      const direction = positionLine[2] as Direction;
+      const positionMatch = lines[i].match(/^(\d+)\s+(\d+)\s+([NESW])$/);
+      if (!positionMatch) throw new Error(`Invalid rover position: "${lines[i]}"`);
+      const x = Number(positionMatch[1]);
+      const y = Number(positionMatch[2]);
+      const direction = positionMatch[3] as Direction;
+      if (!mission.plateau.isWithinBounds(x, y)) {
+        throw new Error(`Rover position outside plateau: "${lines[i]}"`);
+      }
 
       const rover = new Rover(x, y, direction);
       mission.addRover(rover);
 
       const commands = lines[i + 1];
+      if (!/^[LRM]*$/.test(commands)) throw new Error(`Invalid commands: "${commands}"`);
       mission.executeRoverCommands(mission.rovers.length - 1, commands);
     }
 
