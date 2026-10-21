@@ -1,7 +1,9 @@
 package marsrover
 
 import (
+	"errors"
 	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -166,25 +168,47 @@ func (m *MarsRoverMission) RoverOutput() string {
 	return strings.Join(m.RoverPositions(), "\n")
 }
 
-func ParseInput(input string) *MarsRoverMission {
+var (
+	plateauPattern  = regexp.MustCompile(`^(\d+)\s+(\d+)$`)
+	positionPattern = regexp.MustCompile(`^(\d+)\s+(\d+)\s+([NESW])$`)
+	commandsPattern = regexp.MustCompile(`^[LRM]*$`)
+)
+
+func ParseInput(input string) (*MarsRoverMission, error) {
 	lines := strings.Split(strings.TrimSpace(input), "\n")
-	plateauLine := strings.Split(lines[0], " ")
-	maxX, _ := strconv.Atoi(plateauLine[0])
-	maxY, _ := strconv.Atoi(plateauLine[1])
+	if len(lines)%2 == 0 {
+		return nil, errors.New("each rover needs a position line and a commands line")
+	}
+
+	plateauMatch := plateauPattern.FindStringSubmatch(lines[0])
+	if plateauMatch == nil {
+		return nil, fmt.Errorf("invalid plateau: %q", lines[0])
+	}
+	maxX, _ := strconv.Atoi(plateauMatch[1])
+	maxY, _ := strconv.Atoi(plateauMatch[2])
 	mission := NewMarsRoverMission(maxX, maxY)
 
 	for i := 1; i < len(lines); i += 2 {
-		positionLine := strings.Split(lines[i], " ")
-		x, _ := strconv.Atoi(positionLine[0])
-		y, _ := strconv.Atoi(positionLine[1])
-		direction := Direction(positionLine[2])
+		positionMatch := positionPattern.FindStringSubmatch(lines[i])
+		if positionMatch == nil {
+			return nil, fmt.Errorf("invalid rover position: %q", lines[i])
+		}
+		x, _ := strconv.Atoi(positionMatch[1])
+		y, _ := strconv.Atoi(positionMatch[2])
+		direction := Direction(positionMatch[3])
+		if !mission.plateau.IsWithinBounds(x, y) {
+			return nil, fmt.Errorf("rover position outside plateau: %q", lines[i])
+		}
 
 		rover := NewRover(x, y, direction)
 		mission.AddRover(rover)
 
 		commands := lines[i+1]
+		if !commandsPattern.MatchString(commands) {
+			return nil, fmt.Errorf("invalid commands: %q", commands)
+		}
 		mission.ExecuteRoverCommands(len(mission.rovers)-1, commands)
 	}
 
-	return mission
+	return mission, nil
 }

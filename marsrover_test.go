@@ -2,6 +2,7 @@ package marsrover
 
 import (
 	"slices"
+	"strings"
 	"testing"
 )
 
@@ -330,7 +331,10 @@ LMLMLMLMM
 3 3 E
 MMRMMRMRRM`
 
-		mission := ParseInput(input)
+		mission, err := ParseInput(input)
+		if err != nil {
+			t.Fatalf("ParseInput() error = %v", err)
+		}
 		want := `1 3 N
 5 1 E`
 		if got := mission.RoverOutput(); got != want {
@@ -343,7 +347,10 @@ MMRMMRMRRM`
 0 0 N
 MMM`
 
-		mission := ParseInput(input)
+		mission, err := ParseInput(input)
+		if err != nil {
+			t.Fatalf("ParseInput() error = %v", err)
+		}
 		if got, want := mission.RoverOutput(), `0 3 N`; got != want {
 			t.Errorf("RoverOutput() = %q, want %q", got, want)
 		}
@@ -354,7 +361,10 @@ MMM`
 1 2 N
 LMLMLMLMM`
 
-		mission := ParseInput(input)
+		mission, err := ParseInput(input)
+		if err != nil {
+			t.Fatalf("ParseInput() error = %v", err)
+		}
 		if got, want := mission.RoverOutput(), `1 3 N`; got != want {
 			t.Errorf("RoverOutput() = %q, want %q", got, want)
 		}
@@ -367,11 +377,83 @@ M
 5 5 E
 M`
 
-		mission := ParseInput(input)
+		mission, err := ParseInput(input)
+		if err != nil {
+			t.Fatalf("ParseInput() error = %v", err)
+		}
 		want := `0 1 N
 6 5 E`
 		if got := mission.RoverOutput(); got != want {
 			t.Errorf("RoverOutput() = %q, want %q", got, want)
 		}
 	})
+}
+
+func TestParseInputErrors(t *testing.T) {
+	tests := []struct {
+		name    string
+		input   string
+		wantErr string
+	}{
+		{
+			name: "invalid plateau",
+			input: `5 x
+1 2 N
+M`,
+			wantErr: "invalid plateau",
+		},
+		{
+			name: "negative plateau",
+			input: `-5 5
+1 2 N
+M`,
+			wantErr: "invalid plateau",
+		},
+		{
+			name: "invalid direction",
+			input: `5 5
+1 2 Q
+M`,
+			wantErr: "invalid rover position",
+		},
+		{
+			name: "missing coordinate",
+			input: `5 5
+1 N
+M`,
+			wantErr: "invalid rover position",
+		},
+		{
+			name: "rover outside plateau",
+			input: `5 5
+6 2 N
+M`,
+			wantErr: "outside plateau",
+		},
+		{
+			name: "invalid command",
+			input: `5 5
+1 2 N
+MXM`,
+			wantErr: "invalid commands",
+		},
+		{
+			name: "missing commands line",
+			input: `5 5
+1 2 N`,
+			wantErr: "position line and a commands line",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mission, err := ParseInput(tt.input)
+			if err == nil {
+				t.Fatalf("ParseInput() = %v, want error containing %q", mission, tt.wantErr)
+			}
+			if !strings.Contains(err.Error(), tt.wantErr) {
+				t.Errorf("ParseInput() error = %q, want error containing %q", err, tt.wantErr)
+			}
+		})
+	}
 }
