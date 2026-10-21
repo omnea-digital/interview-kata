@@ -284,4 +284,57 @@ M`;
     expect(mission.getRoverOutput()).toBe(`0 1 N
 6 5 E`);
   });
+
+  it.each([
+    [
+      "invalid plateau",
+      `5 x
+1 2 N
+M`,
+      "Invalid plateau",
+    ],
+    [
+      "negative plateau",
+      `-5 5
+1 2 N
+M`,
+      "Invalid plateau",
+    ],
+    [
+      "invalid direction",
+      `5 5
+1 2 Q
+M`,
+      "Invalid rover position",
+    ],
+    [
+      "missing coordinate",
+      `5 5
+1 N
+M`,
+      "Invalid rover position",
+    ],
+    [
+      "rover outside plateau",
+      `5 5
+6 2 N
+M`,
+      "outside plateau",
+    ],
+    [
+      "invalid command",
+      `5 5
+1 2 N
+MXM`,
+      "Invalid commands",
+    ],
+    [
+      "missing commands line",
+      `5 5
+1 2 N`,
+      "position line and a commands line",
+    ],
+  ])("should throw on %s", (_, input, message) => {
+    expect(() => MarsRoverMission.parseInput(input)).toThrow(message);
+  });
 });
