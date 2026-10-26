@@ -62,3 +62,35 @@ Expected Output:
 ### SOLUTION
 
 A solution to this problem has been implemented in `index.ts`. In the interview, we'll improve and extend this implementation.
+
+### OBSTACLES
+
+Obstacles can be listed between the plateau line and the first rover, one per line, as the letter `O`
+followed by coordinates:
+
+```
+5 5
+O 1 3
+1 2 N
+MRM
+```
+
+A rover that would move onto an obstacle stays where it is, skips its remaining commands and reports a
+trailing `O`, e.g. `1 2 N O`.
+
+### WEB APP
+
+The mission can be run from a browser, which replays the rovers' moves and shades every square of the
+plateau that has been visited.
+
+```
+index.ts          domain: Rover, Plateau, MarsRoverMission (records the trail of squares entered)
+shared/api.ts     request/response types shared by server and client
+server/           Express API: POST /api/simulations { "input": "..." }
+web/              React + Vite client
+```
+
+- `npm install`
+- `npm run dev` starts the API on port 3001 and the client on http://localhost:5173
+- `npm run build && npm start` serves the built client and API together on http://localhost:3001
+- `npm test` runs the Jest suites in watch mode; `npm run typecheck` checks the server and client

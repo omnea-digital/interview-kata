@@ -1,0 +1,255 @@
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --text: #1d1c1a;
+  --muted: #6b6862;
+  --border: #dedad3;
+  --accent: #b5432a;
+  --accent-text: #ffffff;
+  --error: #b42318;
+
+  --plateau-empty: #efe9e1;
+  --plateau-visited: #e3a37f;
+  --plateau-head: #b5432a;
+  --plateau-obstacle: #3b3835;
+  --plateau-grid: #d6cec3;
+
+  color-scheme: light dark;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161514;
+    --surface: #1f1e1c;
+    --text: #ece9e4;
+    --muted: #a19d96;
+    --border: #3a3734;
+    --accent: #e0714f;
+    --accent-text: #1a0f0b;
+    --error: #f97066;
+
+    --plateau-empty: #2a2725;
+    --plateau-visited: #8a4a32;
+    --plateau-head: #f08a63;
+    --plateau-obstacle: #c9c4bc;
+    --plateau-grid: #3a3633;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+@media (min-width: 860px) {
+  .layout {
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+textarea {
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+}
+
+.hint {
+  font-size: 0.85rem;
+  margin: 6px 0 12px;
+}
+
+code,
+pre,
+textarea {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  /* The obstacle marker is the letter O, so zero must look different. */
+  font-variant-numeric: slashed-zero;
+}
+
+button {
+  font: inherit;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+select {
+  font: inherit;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.error {
+  color: var(--error);
+  margin: 12px 0 0;
+}
+
+.output {
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.output pre {
+  margin: 0 0 8px;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.output p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.plateau {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.plateau canvas {
+  display: block;
+  border-radius: 4px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.controls input[type="range"] {
+  flex: 1 1 160px;
+  accent-color: var(--accent);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 4px;
+  font-size: 0.9rem;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.swatch-empty {
+  background: var(--plateau-empty);
+}
+
+.swatch-visited {
+  background: var(--plateau-visited);
+}
+
+.swatch-head {
+  background: var(--plateau-head);
+}
+
+.swatch-obstacle {
+  background: var(--plateau-obstacle);
+}
+
+.empty {
+  text-align: center;
+  padding: 48px 0;
+}

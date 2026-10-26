@@ -5,7 +5,11 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll"
+    "dev": "concurrently -n api,web -c blue,magenta \"tsx watch server/main.ts\" \"vite web\"",
+    "build": "vite build web",
+    "start": "tsx server/main.ts",
+    "test": "jest --watchAll",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p web"
   },
   "repository": {
     "type": "git",
@@ -20,9 +24,20 @@
   "dependencies": {
     "@swc/core": "^1.15.41",
     "@swc/jest": "^0.2.39",
+    "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "concurrently": "^10.0.6",
+    "express": "^5.3.0",
     "jest": "^30.4.2",
     "prettier": "^3.8.4",
-    "typescript": "^6.0.3"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.5"
   }
 }
