@@ -2,7 +2,7 @@
 
 NASA scientists are planning a mission to Mars. Their rovers will execute whatever instructions they receive. You’re building a simulator so the scientists can check what their rovers will do before sending instructions.
 
-**Choose your language before the interview.** The exercise is language agnostic. We have starters for [TypeScript](https://github.com/omnea-digital/interview-kata/tree/main), [Python with venv and mypy](https://github.com/omnea-digital/interview-kata/tree/python), and [Python with uv, Ruff, and ty](https://github.com/omnea-digital/interview-kata/tree/python-astral). If you’d prefer another language, ask us ahead of time and we’ll do our best to accommodate you.
+**Choose your language before the interview.** The exercise is language agnostic. We have starters for [TypeScript](https://github.com/omnea-digital/interview-kata/tree/main), [Go](https://github.com/omnea-digital/interview-kata/tree/go), [Python with venv and mypy](https://github.com/omnea-digital/interview-kata/tree/python), and [Python with uv, Ruff, and ty](https://github.com/omnea-digital/interview-kata/tree/python-astral). If you’d prefer another language, ask us ahead of time and we’ll do our best to accommodate you.
 
 ## Your brief
 
@@ -14,7 +14,7 @@ During the pairing session, your interviewer will bring you new requests from th
 
 Decide what to tackle first and how much you can deliver in the time available. Aim to get the code as close to production quality as you can.
 
-We encourage AI tools, but they're optional. You won't be assessed on whether you use them. However you work, you should understand the code you finish with and be able to explain how it works.
+We encourage AI tooling for this interview, and expect you should understand the code you finish with and be able to explain how it works.
 
 ## How the prototype works
 
