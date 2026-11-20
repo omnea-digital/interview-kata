@@ -1,48 +1,31 @@
-# THE MARS ROVER KATA
+# Mars rover mission simulator
 
-> **Versions of this kata**
->
-> - [TypeScript](https://github.com/omnea-digital/interview-kata)
-> - **Python with `mypy`/`venv`** — you are here
-> - [Python with `uv`/`ruff`/`ty`](https://github.com/omnea-digital/interview-kata/tree/python-astral)
+NASA scientists are planning a mission to Mars. Their rovers will execute whatever instructions they receive. You’re building a simulator so the scientists can check what their rovers will do before sending instructions.
 
-A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This plateau, which is
-curiously rectangular, must be navigated by the rovers so that their on-board cameras can get a
-complete view of the surrounding terrain to send back to Earth.
+**Choose your language before the interview.** The exercise is language agnostic. We have starters for [TypeScript](https://github.com/omnea-digital/interview-kata/tree/main), [Python with venv and mypy](https://github.com/omnea-digital/interview-kata/tree/python), and [Python with uv, Ruff, and ty](https://github.com/omnea-digital/interview-kata/tree/python-astral). If you’d prefer another language, ask us ahead of time and we’ll do our best to accommodate you.
 
-A rover's position and location is represented by a combination of x and y coordinates and a letter
-representing one of the four cardinal compass points. The plateau is divided up into a grid to simplify
-navigation. An example position might be 0, 0, N, which means the rover is in the bottom left corner
-and facing North.
+## Your brief
 
-In order to control a rover, NASA sends a simple string of letters. The possible letters are `L`, `R` and
-`M`. `L` and `R` makes the rover spin 90 degrees left or right respectively, without moving from its
-current spot. `M` means move forward one grid point, and maintain the same heading.
-Assume that the square directly North from (x, y) is (x, y+1).
+One of the scientists used AI to build the first version of the simulator, but they don't have a software engineering background.
 
-### INPUT
+Review the prototype and its code. If you were using it to plan a mission, what would you keep, and what would you change? You can build on what's there or rewrite any part of it.
 
-The first line of input is the upper-right coordinates of the plateau, the lower-left coordinates are
-assumed to be 0,0.
+During the pairing session, your interviewer will bring you new requests from the scientists and answer questions on their behalf. Bring your own ideas, too.
 
-The rest of the input is information pertaining to the rovers that have been deployed. Each rover has
-two lines of input. The first line gives the rover's position, and the second line is a series of
-instructions telling the rover how to explore the plateau. The position is made up of two integers
-and a letter separated by spaces, corresponding to the x and y coordinates and the rover's
-orientation.
+Decide what to tackle first and how much you can deliver in the time available. Aim to get the code as close to production quality as you can.
 
-Each rover will be finished sequentially, which means that the second rover won`t start to move until
-the first one has finished moving.
+We encourage AI tools, but they're optional. You won't be assessed on whether you use them. However you work, you should understand the code you finish with and be able to explain how it works.
 
-### OUTPUT
+## How the prototype works
 
-The output for each rover should be its final coordinates and heading.
+The first line of a mission plan gives the upper-right coordinates of a rectangular plateau. The lower-left corner is `0 0`. Each rover then gets two lines: its starting `x y heading` (where heading is `N`, `E`, `S` or `W`), followed by its commands. Rovers run in the order listed, each finishing before the next starts.
 
-### EXAMPLE
+- `L` and `R` turn a rover 90° left or right in place.
+- `M` moves it forward one grid point in the direction it faces. North increases `y` and east increases `x`.
 
-Test Input:
+For example, the scientists can enter this two-rover plan:
 
-```
+```text
 5 5
 1 2 N
 LMLMLMLMM
@@ -50,39 +33,23 @@ LMLMLMLMM
 MMRMMRMRRM
 ```
 
-Expected Output:
+The simulator reports the final position and heading of each rover, in the same order:
 
-```
+```text
 1 3 N
 5 1 E
 ```
 
-![](./compass.png)
+![Compass showing the four cardinal directions](./compass.png)
 
-## Getting started (Python)
+## Running this version
 
-```bash
+The simulator is in [index.py](./index.py) and the tests are in [index_test.py](./index_test.py). This starter uses typed Python with strict mypy checks.
+
+```sh
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-```
-
-Run the tests:
-
-```bash
 pytest
-```
-
-This kata is written in **typed Python** — annotate your code and keep it clean under
-`mypy` (configured in strict mode):
-
-```bash
 mypy .
 ```
-
-You start with a single failing placeholder test in `index_test.py`. Delete it and
-drive your solution out test-first.
-
-## SOLUTION
-
-A solution to this problem has been implemented in `index.py`. In the interview, we'll improve and extend this implementation.
